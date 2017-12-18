@@ -8,8 +8,8 @@ lazy val foo =
   crossProject(ScalaPlatform("2.11"), ScalaPlatform("2.12"))
     .crossType(CrossType.Pure)
 
-lazy val `foo-2.11` = foo.scala("2.11")
-lazy val `foo-2.12` = foo.scala("2.12")
+lazy val `foo-2.11` = foo.scala("2.11").jvm
+lazy val `foo-2.12` = foo.scala("2.12").jvm
 
 check := {
   def expected(scala: String, config: String ) = Seq(

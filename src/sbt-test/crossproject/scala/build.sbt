@@ -28,9 +28,9 @@ lazy val bar =
       description := "2.12 settings"
     )
 
-lazy val bar211 = bar.scala("2.11")
-lazy val bar212 = bar.scala("2.12")
-lazy val bar213 = bar.scala("2.13")
+lazy val bar211 = bar.scala("2.11").jvm
+lazy val bar212 = bar.scala("2.12").jvm
+lazy val bar213 = bar.scala("2.13").jvm
 
 lazy val foo =
   crossProject(ScalaPlatform("2.11"), ScalaPlatform("2.12"))

@@ -6,8 +6,8 @@ lazy val lib =
     .scalaSettings("2.11")(scalaVersion := "2.11.12")
     .scalaSettings("2.12")(scalaVersion := "2.12.4")
 
-lazy val `lib-2.11` = lib.scala("2.11")
-lazy val `lib-2.12` = lib.scala("2.12")
+lazy val `lib-2.11` = lib.scala("2.11").jvm
+lazy val `lib-2.12` = lib.scala("2.12").jvm
 
 // Apache Spark application built for 2.11 only
 lazy val sparkApp =
@@ -17,4 +17,4 @@ lazy val sparkApp =
     .settings(/* ... */)
     .scalaSettings("2.11")(scalaVersion := "2.11.12")
 
-lazy val `spark-app-2.11` = sparkApp.scala("2.11")
+lazy val `spark-app-2.11` = sparkApp.scala("2.11").jvm
