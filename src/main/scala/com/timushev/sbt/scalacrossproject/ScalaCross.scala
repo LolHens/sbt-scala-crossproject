@@ -40,13 +40,9 @@ trait ScalaCross {
   implicit class ScalaCrossProjectOps(project: CrossProject) {
 
     def scala(version: String): CrossProject = {
-      val newProjects = project.projects.map {
-        case (ScalaPlatform(platform, `version`), project) => platform -> project
-        case e => e
-      }
-      val newProject = project.configurePlatforms()(identity)
+      def withProjects(project: CrossProject, projects: Map[Platform, Project]): CrossProject = {
+        val newProject = project.configurePlatforms()(identity)
 
-      {
         val field = classOf[CrossProject].getDeclaredField("projects")
         field.setAccessible(true)
 
@@ -54,10 +50,15 @@ trait ScalaCross {
         modifiersField.setAccessible(true)
         modifiersField.setInt(field, field.getModifiers & ~Modifier.FINAL)
 
-        field
-      }.set(newProject, newProjects)
+        field.set(newProject, projects)
 
-      newProject
+        newProject
+      }
+
+      withProjects(project, project.projects.map {
+        case (ScalaPlatform(platform, `version`), project) => platform -> project
+        case e => e
+      })
     }
 
     def scalaSettings(ss: Def.SettingsDefinition*): CrossProject =
