@@ -13,7 +13,7 @@ lazy val `foo-2.12` = foo.scala("2.12").jvm
 
 check := {
   def expected(scala: String, config: String ) = Seq(
-    baseDirectory.value / "foo" / s".scala-$scala" / "src" / config / "resources",
+    baseDirectory.value / "foo" / s".jvm-$scala" / "src" / config / "resources",
     baseDirectory.value / "foo" / "src" / config / "resources"
   )
   assertEquals((unmanagedResourceDirectories in(`foo-2.11`, Compile)).value, expected("2.11", "main"))

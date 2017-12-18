@@ -6,7 +6,7 @@ organization := "com.timushev.sbt"
 scalacOptions := Seq("-deprecation", "-unchecked", "-feature")
 
 scriptedLaunchOpts += s"-Dplugin.version=${version.value}"
-scriptedBufferLog := false
+//scriptedBufferLog := false
 
 crossSbtVersions := Seq("0.13.16", "1.0.4")
 

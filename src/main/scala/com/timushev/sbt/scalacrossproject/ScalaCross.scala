@@ -7,7 +7,7 @@ import sbt._
 import sbtcrossproject.{CrossProject, JVMPlatform, Platform}
 
 case class ScalaPlatform(platform: Platform, version: String) extends Platform {
-  def identifier: String = s"${platform.identifier}-scala-$version"
+  def identifier: String = s"${platform.identifier}-$version"
   def sbtSuffix: String = s"${platform.sbtSuffix}_${version.replace('.', '_')}"
   def enable(project: Project): Project =
     platform.enable(project
