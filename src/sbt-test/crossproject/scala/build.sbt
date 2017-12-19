@@ -9,9 +9,9 @@ def assertEquals[T](actual: T, expected: T): Unit = {
 }
 
 lazy val bar =
-  crossProject(ScalaPlatform("2.11"),
-               ScalaPlatform("2.12"),
-               ScalaPlatform("2.13"))
+  crossProject(JVMPlatform.scala("2.11"),
+               JVMPlatform.scala("2.12"),
+               JVMPlatform.scala("2.13"))
     .crossType(CrossType.Pure)
     .settings(
       description := "common settings"
@@ -33,7 +33,7 @@ lazy val bar212 = bar.scala("2.12").jvm
 lazy val bar213 = bar.scala("2.13").jvm
 
 lazy val foo =
-  crossProject(ScalaPlatform("2.11"), ScalaPlatform("2.12"))
+  crossProject(JVMPlatform.scala("2.11"), JVMPlatform.scala("2.12"))
     .crossType(CrossType.Pure)
     .dependsOn(bar)
     .settings(

@@ -4,7 +4,7 @@ import java.lang.reflect.{Field, Modifier}
 
 import sbt.Keys._
 import sbt._
-import sbtcrossproject.{CrossProject, JVMPlatform, Platform}
+import sbtcrossproject.{CrossProject, Platform}
 
 case class ScalaPlatform(platform: Platform, version: String) extends Platform {
   def identifier: String = s"${platform.identifier}-$version"
@@ -31,11 +31,11 @@ case class ScalaPlatform(platform: Platform, version: String) extends Platform {
 
 trait ScalaCross {
 
-  def ScalaPlatform(platform: Platform, version: String): ScalaPlatform =
-    com.timushev.sbt.scalacrossproject.ScalaPlatform(platform, version)
+  implicit class PlatformOps(platform: Platform) {
 
-  def ScalaPlatform(version: String): ScalaPlatform =
-    ScalaPlatform(JVMPlatform, version)
+    def scala(version: String): ScalaPlatform =
+      com.timushev.sbt.scalacrossproject.ScalaPlatform(platform, version)
+  }
 
   implicit class ScalaCrossProjectOps(project: CrossProject) {
 

@@ -5,7 +5,7 @@ def assertEquals[T](actual: T, expected: T): Unit = {
 }
 
 lazy val foo =
-  crossProject(ScalaPlatform("2.11"), ScalaPlatform("2.12"))
+  crossProject(JVMPlatform.scala("2.11"), JVMPlatform.scala("2.12"))
     .crossType(CrossType.Pure)
 
 lazy val `foo-2.11` = foo.scala("2.11").jvm
